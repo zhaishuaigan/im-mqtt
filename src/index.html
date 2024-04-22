@@ -5,10 +5,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>聊天室</title>
+    <link rel="stylesheet" href="./assets/plugin/element-plus/index.css" />
+    <link rel="stylesheet" href="./assets/style/index.css">
+    <script src="./assets/plugin/vue.global.prod.js"></script>
+    <script src="./assets/plugin/encode.js"></script>
+    <script src="./assets/plugin/mqtt.min.js"></script>
+    <script src="./assets/plugin/element-plus/index.full.min.js"></script>
+    <script src="./assets/plugin/moment.min.js"></script>
+    <script src="./assets/script/http.js"></script>
+    <script src="./assets/script/data.js"></script>
+    <script src="./assets/script/api.js"></script>
+    <script src="./assets/script/mqtt.js"></script>
+    <script src="./assets/script/room.js"></script>
 </head>
 
 <body>
-    在线聊天室
+    <div id="加载中">
+        正在加载请稍后...
+    </div>
+    <div id="主程序界面">
+        <div class="开始界面" v-if="显示界面 == '开始界面'">
+            <button class="按钮" @click="创建聊天室的界面 = true;">创建一个聊天室</button>
+            <button class="按钮" @click="加入聊天室的界面 = true;">加入一个聊天室</button>
+        </div>
+
+        <el-dialog v-model="创建聊天室的界面" title="创建聊天室" width="500">
+            <el-form :model="创建聊天室的数据" @submit.native.prevent="创建聊天室(创建聊天室的数据);">
+                <el-form-item label="聊天室的名字" :label-width="formLabelWidth">
+                    <el-input v-model="创建聊天室的数据.聊天室名字" autocomplete="off" />
+                </el-form-item>
+                <el-form-item label="聊天室的密码" :label-width="formLabelWidth">
+                    <el-input v-model="创建聊天室的数据.聊天室密码" autocomplete="off" />
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button @click="创建聊天室的界面 = false">取消</el-button>
+                    <el-button type="primary" @click="创建聊天室(创建聊天室的数据);">
+                        创建
+                    </el-button>
+                </div>
+            </template>
+        </el-dialog>
+
+        <el-dialog v-model="加入聊天室的界面" title="加入聊天室" width="500">
+            <el-form :model="加入聊天室的数据" @submit.native.prevent="加入聊天室(加入聊天室的数据);">
+                <el-form-item label="聊天室的名字" :label-width="formLabelWidth">
+                    <el-input v-model="加入聊天室的数据.聊天室名字" autocomplete="off" />
+                </el-form-item>
+                <el-form-item label="聊天室的密码" :label-width="formLabelWidth">
+                    <el-input v-model="加入聊天室的数据.聊天室密码" autocomplete="off" />
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button @click="加入聊天室的界面 = false">取消</el-button>
+                    <el-button type="primary" @click="加入聊天室(加入聊天室的数据);">
+                        加入
+                    </el-button>
+                </div>
+            </template>
+        </el-dialog>
+
+        <div class="room" v-if="显示界面 == '聊天室界面'">
+            <div class="room-title">{{当前聊天室.名字}}</div>
+            <div class="room-content">
+                <div class="message">
+                    <div class="message-content">
+                        <div class="message-item">
+                            <div class="message-item-name">用户名</div>
+                            <div class="message-item-content">你好</div>
+                        </div>
+                    </div>
+                    <div class="message-create">
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <button>发送</button>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-title">成员列表</div>
+                    <div class="member-content">
+                        <div class="member-item">
+                            <div class="member-item-name">
+                                <span>用户名</span>
+                                <div class="setting">
+                                    <div class="setting-item">设置</div>
+                                    <div class="setting-item">禁言</div>
+                                    <div class="setting-item">移除</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/script/index.js"></script>
 </body>
 
 </html>
