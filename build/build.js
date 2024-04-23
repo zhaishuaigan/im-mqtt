@@ -9,6 +9,9 @@ function includeCss() {
             var href = link[0].match(/href="([^"]*)"/);
             if (href) {
                 var css = fs.readFileSync("./src/" + href[1], "utf-8");
+                css = css.replace(/\/\*[\s\S]*?\*\//g, "");
+                css = css.replace(/\n/g, '');
+                css = css.replace(/\s+/g, ' ');
                 html = html.replace(link[0], "<style>" + css + "</style>");
                 console.log("打包css成功: " + href[1]);
             }

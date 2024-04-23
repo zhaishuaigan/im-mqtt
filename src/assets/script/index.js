@@ -53,8 +53,10 @@
                 加载中.remove();
             },
             创建聊天室: async function (创建聊天室的数据) {
-                var 名字存在 = await 聊天室.检测聊天室是否存在(创建聊天室的数据.聊天室名字);
-                if (名字存在) {
+                var 名字 = 创建聊天室的数据.名字;
+                var 加入密码 = 创建聊天室的数据.加入密码;
+                var 管理密码 = 创建聊天室的数据.管理密码;
+                if (await 聊天室.已存在(名字)) {
                     ElementPlus.ElNotification({
                         title: '提示',
                         message: '聊天室名字已存在',
@@ -63,16 +65,29 @@
                     });
                     return;
                 }
-                this.当前聊天室 = await 聊天室.创建聊天室(创建聊天室的数据.聊天室名字, 创建聊天室的数据.聊天室密码);
+                this.当前聊天室 = await 聊天室.创建聊天室(名字, 加入密码, 管理密码);
                 console.log('新聊天室: ', this.当前聊天室);
                 this.显示界面 = '聊天室界面';
                 this.创建聊天室的界面 = false;
             },
-            加入聊天室: function (加入聊天室的数据) {
-
-                // TODO:: 聊天室名字是否存在
-
-                console.log('加入聊天室: ', 加入聊天室的数据);
+            加入聊天室: async function (加入聊天室的数据) {
+                var 名字 = 加入聊天室的数据.名字;
+                var 加入密码 = 加入聊天室的数据.加入密码;
+                var 管理密码 = 加入聊天室的数据.管理密码;
+                var 加入的聊天室 = await 聊天室.加入聊天室(名字, 加入密码, 管理密码)
+                    .catch((错误信息) => {
+                        ElementPlus.ElNotification({
+                            title: '提示',
+                            message: 错误信息,
+                            type: 'error',
+                            duration: 3000,
+                        });
+                    });
+                if (!加入的聊天室) {
+                    return;
+                }
+                this.聊天室 = 加入的聊天室;
+                this.显示界面 = '聊天室界面';
             },
 
             收到消息: function (发送人, 消息) {

@@ -80,6 +80,15 @@
         获取聊天室列表: async function () {
             return await this.获取数据('聊天室列表', []);
         },
+        根据名字获取聊天室: async function (名字) {
+            var 聊天室列表 = await this.获取聊天室列表();
+            for (var i = 0; i < 聊天室列表.length; i++) {
+                if (聊天室列表[i].名字 === 名字) {
+                    return 聊天室列表[i];
+                }
+            }
+            return null;
+        },
         发送邮件: async (邮箱, 标题, 内容) => {
             var 接口地址 = 'https://api.apiopen.top/api/sendMail';
             var 参数 = {

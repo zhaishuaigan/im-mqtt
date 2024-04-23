@@ -48,43 +48,10 @@ body {
     margin: 0px 10px;
 }
 
-.room {
+.聊天室界面 {
     background-color: #fff;
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    visibility: hidden;
-}
-
-.room-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.room-list li {
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.room-list li:hover {
-    background-color: #f0f2f5;
-}
-
-.room-list li:last-child {
-    margin-bottom: 0;
-}
-
-.room-list li a {}
-
-.room-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.room-content {
-    margin-bottom: 10px;
-    font-size: 16px;
-    line-height: 1.5;
 }
