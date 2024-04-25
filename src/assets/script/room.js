@@ -3,6 +3,7 @@
         this.名字 = "";
         this.加入密码 = "";
         this.管理密码 = "";
+        this.已是管理员 = false;
     }
 
     聊天室.加密密码 = function (密码) {
@@ -27,7 +28,6 @@
         return false;
     }
     聊天室.创建聊天室 = async function (名字, 加入密码, 管理密码) {
-        var 聊天已存在 = await 聊天室.检测聊天室是否存在(名字);
         if (await 聊天室.已存在(名字)) {
             throw new Error('聊天室已存在, 无法创建!');
         }
@@ -43,6 +43,7 @@
             创建时间: moment().format('YYYY-MM-DD HH:mm:ss'),
         });
         await 接口.保存数据('聊天室列表', 聊天室列表);
+        新聊天室.已是管理员 = true;
         return 新聊天室;
     }
 
@@ -60,10 +61,11 @@
             }
         }
         var 新聊天室 = new 聊天室();
-        新聊天室.名字 = 聊天室名字;
-        新聊天室.加入密码 = 聊天室.加密密码(密码)
+        新聊天室.名字 = 名字;
+        新聊天室.加入密码 = 聊天室.加密密码(加入密码)
         if (管理密码) {
-            新聊天室.管理密码 = 聊天室.加密密码(管理密码)
+            新聊天室.管理密码 = 聊天室.加密密码(管理密码);
+            新聊天室.已是管理员 = true;
         }
         return 新聊天室;
     }
@@ -79,15 +81,17 @@
     }
 
     聊天室.不存在 = async function (聊天室名字) {
-        return 聊天室.房间已存在(聊天室名字);
+        var 已存在 = await 聊天室.已存在(聊天室名字);
+        return !已存在;
     }
 
-    聊天室.prototype.检测管理员权限 = async function () {
+    聊天室.prototype.升级管理权限 = async function (管理密码) {
         var 聊天室数据 = await 接口.根据名字获取聊天室(this.名字);
-        if (聊天室数据.管理密码 == this.管理密码) {
+        if (聊天室数据.管理密码 == 聊天室.加密密码(管理密码)) {
+            this.已是管理员 = true;
             return true;
         }
-        return false;
+        throw new Error('管理密码错误!');
     }
 
     聊天室.prototype.链接服务器 = function (房间名字, 房间密码) {

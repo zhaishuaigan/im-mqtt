@@ -3,7 +3,6 @@
         上次请求时间: 0,
         接口调用间隔: 2000,
         延时: async function (时间) {
-            console.log('延时时间: ', 时间);
             return new Promise(resolve => {
                 setTimeout(() => {
                     resolve();
@@ -11,10 +10,8 @@
             })
         },
         自动处理接口调用时间: async function () {
-            console.log('自动处理接口调用时间:', this.上次请求时间);
             var 当前时间 = new Date().getTime();
             var 延时时间 = 0;
-            console.log('当前时间:', 当前时间);
             // 上次请求时间大于当前时间，需要排队请求
             if (this.上次请求时间 >= 当前时间) {
                 延时时间 = this.上次请求时间 - 当前时间 + this.接口调用间隔;

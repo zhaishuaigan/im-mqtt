@@ -1,6 +1,5 @@
 (async () => {
     var 主程序 = null;
-    console.log(1111);
     Vue.createApp({
         el: '#app',
         data: function () {
@@ -10,45 +9,38 @@
                 显示界面: '开始界面',
                 创建聊天室的界面: false,
                 创建聊天室的数据: {
-                    聊天室名字: '',
-                    聊天室密码: '',
+                    名字: '',
+                    加入密码: '',
+                    管理密码: '',
                 },
                 加入聊天室的界面: false,
                 加入聊天室的数据: {
-                    聊天室名字: '',
-                    聊天室密码: '',
+                    名字: '',
+                    加入密码: '',
+                    管理密码: '',
                 },
                 当前聊天室: null,
                 消息列表: [],
             };
         },
         created: async function () {
-            console.log('主程序初始化');
             主程序 = this;
             主程序.进入开始界面();
             // TODO 加载资源
-
             主程序.加载完成 = true;
-
-            var 房间列表 = await 接口.获取数据('房间列表', [
-                {
-                    房间名字: '大厅2',
-                    房间密码: '',
-                    创建时间: moment().format('YYYY-MM-DD HH:mm:ss'),
-                }
-            ]);
-            console.log('房间列表: ', 房间列表);
-
-            // console.log('密码测试: ', 聊天室.加密密码("123"));
-
-            // 接口.发送邮件('zhaishuaigan@qq.com', '测试一下', '这是内容, 居然需要超过五个字符.')
-            //     .then((返回结果) => {
-            //         console.log('发送邮件接口的返回结果: ', 返回结果);
-            //     });
+            await this.测试聊天室界面();
         },
         methods: {
+            测试聊天室界面: async function () {
+                var 测试聊天室 = {
+                    名字: '吃瓜群众一起吃瓜',
+                    加入密码: '1',
+                    管理密码: '1',
+                };
+                await this.创建聊天室(测试聊天室);
+                await this.加入聊天室(测试聊天室);
+            },
             进入开始界面: function () {
-                console.log('进入开始界面');
                 主程序界面.style.visibility = 'visible';
                 加载中.remove();
             },
@@ -86,7 +78,7 @@
                 if (!加入的聊天室) {
                     return;
                 }
-                this.聊天室 = 加入的聊天室;
+                this.当前聊天室 = 加入的聊天室;
                 this.显示界面 = '聊天室界面';
             },
 
