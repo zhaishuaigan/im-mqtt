@@ -78,91 +78,13 @@
                 <div class="大标题">{{当前聊天室.名字}}</div>
                 <div class="内容区域">
                     <div class="左边">
-                        <div class="历史消息区域">
-                            <div class="别人发的">
-                                <div class="昵称">张三</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="别人发的">
-                                <div class="昵称">张三</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="别人发的">
-                                <div class="昵称">张三</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="别人发的">
-                                <div class="昵称">张三</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="别人发的">
-                                <div class="昵称">张三</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
-                            <div class="自己发的">
-                                <div class="昵称">我</div>
-                                <div class="消息内容">你好</div>
-                            </div>
+                        <div class="历史消息区域" ref="历史消息区域">
+                            <template v-for="(消息, index) in 消息列表" :key="index">
+                                <div :class="[消息.发送人 == 当前用户名 ? '自己发的' : '别人发的']">
+                                    <div class="昵称">{{消息.发送人}}</div>
+                                    <div class="消息内容"><pre>{{消息.内容}}</pre></div>
+                                </div>
+                            </template>
                         </div>
                         <div class="发送消息区域">
                             <div class="工具栏">
@@ -191,15 +113,18 @@
                                     <path d="M224 512c0 159.072 128.928 288 288 288s288-128.928 288-288H224z"></path>
                                 </svg>
                             </div>
-                            <textarea name="" class="文本框" id="" cols="30" rows="10"></textarea>
+                            <textarea name="" v-model="用户输入的内容" @keyup.ctrl.enter="发送消息" class="文本框" id="" cols="30"
+                                rows="10"></textarea>
                             <div class="按钮">
-                                <el-button type="primary">发送 (Ctrl+Enter)</el-button>
+                                <el-button type="primary" @click="发送消息">发送 (Ctrl+Enter)</el-button>
                             </div>
                         </div>
                     </div>
                     <div class="右边">
                         <div class="标题">公告</div>
-                        <div class="公告内容">暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告</div>
+                        <div class="公告内容">
+                            暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告
+                        </div>
                         <div class="标题">群聊成员</div>
                         <div class="成员列表">
                             <ul>

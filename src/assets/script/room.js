@@ -1,9 +1,17 @@
 (() => {
     var 聊天室 = function () {
+        this.消息服务 = null;
+        this.回调函数 = {
+            连接成功: function () { },
+            连接失败: function () { },
+            收到消息: function () { },
+            断开连接: function () { },
+        };
         this.名字 = "";
         this.加入密码 = "";
         this.管理密码 = "";
         this.已是管理员 = false;
+        this.消息主题名 = '';
     }
 
     聊天室.加密密码 = function (密码) {
@@ -67,6 +75,7 @@
             新聊天室.管理密码 = 聊天室.加密密码(管理密码);
             新聊天室.已是管理员 = true;
         }
+        console.log('加入聊天室成功!');
         return 新聊天室;
     }
 
@@ -94,20 +103,37 @@
         throw new Error('管理密码错误!');
     }
 
-    聊天室.prototype.链接服务器 = function (房间名字, 房间密码) {
-        var 消息服务 = new 消息服务();
-    }
-
     聊天室.prototype.修改密码 = function (房间密码) {
         this.房间密码 = 房间密码;
     }
 
-    聊天室.prototype.收到消息 = function (发送人, 消息) {
-
+    聊天室.prototype.连接服务器 = async function () {
+        this.消息主题名 = '/room/' + 接口.加密内容(this.名字);
+        this.消息服务 = 消息服务.创建实例();
+        this.消息服务.连接成功((...参数) => {
+            this.回调函数.连接成功(...参数);
+            this.消息服务.订阅主题(this.消息主题名);
+        })
+        this.消息服务.收到消息((...参数) => {
+            this.回调函数.收到消息(...参数);
+        });
+        this.消息服务.连接服务器();
     }
 
-    聊天室.prototype.发送消息 = function (发送人, 消息) {
+    聊天室.prototype.断开服务器 = function () {
+        this.消息服务.断开服务器();
+    }
 
+    聊天室.prototype.连接成功 = function (回调) {
+        this.回调函数.连接成功 = 回调;
+    }
+
+    聊天室.prototype.收到消息 = function (回调函数) {
+        this.回调函数.收到消息 = 回调函数;
+    }
+
+    聊天室.prototype.发送消息 = function (消息) {
+        this.消息服务.发送消息(this.消息主题名, 消息);
     }
 
 

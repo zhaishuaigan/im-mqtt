@@ -97,6 +97,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
 }
 
 .聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 {
@@ -107,12 +108,14 @@ body {
 }
 
 .聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .别人发的 {
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
 .聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .自己发的 {
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -132,7 +135,14 @@ body {
     padding: 10px;
     line-height: 20px;
     font-size: 14px;
+    max-width: 80%;
     display: inline-block;
+}
+
+.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .消息内容 pre {
+    margin: 0px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .自己发的 .消息内容 {
@@ -169,7 +179,7 @@ body {
 
 .聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 .文本框 {
     flex: auto;
-    padding: 10px;
+    padding: 0px 10px;
     border: none;
     outline: none;
     resize: none;
@@ -192,6 +202,7 @@ body {
     width: 180px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .聊天室界面 .右边 .标题 {

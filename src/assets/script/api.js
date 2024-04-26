@@ -41,8 +41,19 @@
             try {
                 return JSON.parse(decodeURIComponent(atob(内容)));
             } catch (e) {
+                console.log('内容解密失败: ', 内容);
                 return null;
             }
+        },
+        获取本地缓存: function (标志, 默认值) {
+            var 内容 = localStorage.getItem(标志);
+            if (内容) {
+                return this.解密内容(内容);
+            }
+            return 默认值 ? 默认值 : null;
+        },
+        保存本地缓存: function (标志, 内容) {
+            localStorage.setItem(标志, this.加密内容(内容));
         },
         获取数据: async function (标志, 默认值) {
             await this.自动处理接口调用时间();
