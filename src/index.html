@@ -31,13 +31,13 @@
 
         <el-dialog v-model="创建聊天室的界面" title="创建聊天室" width="500">
             <el-form :model="创建聊天室的数据" @submit.native.prevent="创建聊天室(创建聊天室的数据);">
-                <el-form-item label="显示名字" :label-width="formLabelWidth">
+                <el-form-item label="聊天室名字" :label-width="formLabelWidth">
                     <el-input v-model="创建聊天室的数据.名字" autocomplete="off" />
                 </el-form-item>
-                <el-form-item label="加入密码" :label-width="formLabelWidth">
+                <el-form-item label="加入的密码" :label-width="formLabelWidth">
                     <el-input v-model="创建聊天室的数据.加入密码" type="password" autocomplete="off" />
                 </el-form-item>
-                <el-form-item label="管理密码" :label-width="formLabelWidth">
+                <el-form-item label="管理的密码" :label-width="formLabelWidth">
                     <el-input v-model="创建聊天室的数据.管理密码" type="password" autocomplete="off" />
                 </el-form-item>
             </el-form>
@@ -53,13 +53,13 @@
 
         <el-dialog v-model="加入聊天室的界面" title="加入聊天室" width="500">
             <el-form :model="加入聊天室的数据" @submit.native.prevent="加入聊天室(加入聊天室的数据);">
-                <el-form-item label="显示名字" :label-width="formLabelWidth">
+                <el-form-item label="聊天室名字" :label-width="formLabelWidth">
                     <el-input v-model="加入聊天室的数据.名字" autocomplete="off" />
                 </el-form-item>
-                <el-form-item label="加入密码" :label-width="formLabelWidth">
+                <el-form-item label="加入的密码" :label-width="formLabelWidth">
                     <el-input v-model="加入聊天室的数据.加入密码" type="password" autocomplete="off" />
                 </el-form-item>
-                <el-form-item label="管理密码" :label-width="formLabelWidth">
+                <el-form-item label="管理的密码" :label-width="formLabelWidth">
                     <el-input v-model="加入聊天室的数据.管理密码" type="password" autocomplete="off" />
                 </el-form-item>
             </el-form>
