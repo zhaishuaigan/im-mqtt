@@ -80,9 +80,11 @@
                     <div class="左边">
                         <div class="历史消息区域" ref="历史消息区域">
                             <template v-for="(消息, index) in 消息列表" :key="index">
-                                <div :class="[消息.发送人 == 当前用户名 ? '自己发的' : '别人发的']">
+                                <div :class="[(消息.用户标识 == 当前用户标识) ? '自己发的' : '别人发的']">
                                     <div class="昵称">{{消息.发送人}}</div>
-                                    <div class="消息内容"><pre>{{消息.内容}}</pre></div>
+                                    <div class="消息内容">
+                                        <pre>{{消息.内容}}</pre>
+                                    </div>
                                 </div>
                             </template>
                         </div>
@@ -123,53 +125,12 @@
                     <div class="右边">
                         <div class="标题">公告</div>
                         <div class="公告内容">
-                            暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告暂无公告
+                            {{当前聊天室.公告 ? 当前聊天室.公告 : '暂无公告'}}
                         </div>
                         <div class="标题">群聊成员</div>
                         <div class="成员列表">
                             <ul>
-                                <li>张三</li>
-                                <li>李四</li>
-                                <li>王五</li>
-                                <li>赵六</li>
-                                <li>小七</li>
-                                <li>老八</li>
-                                <li>老九</li>
-                                <li>张三</li>
-                                <li>李四</li>
-                                <li>王五</li>
-                                <li>赵六</li>
-                                <li>小七</li>
-                                <li>老八</li>
-                                <li>老九</li>
-                                <li>张三</li>
-                                <li>李四</li>
-                                <li>王五</li>
-                                <li>赵六</li>
-                                <li>小七</li>
-                                <li>老八</li>
-                                <li>老九</li>
-                                <li>张三</li>
-                                <li>李四</li>
-                                <li>王五</li>
-                                <li>赵六</li>
-                                <li>小七</li>
-                                <li>老八</li>
-                                <li>老九</li>
-                                <li>张三</li>
-                                <li>李四</li>
-                                <li>王五</li>
-                                <li>赵六</li>
-                                <li>小七</li>
-                                <li>老八</li>
-                                <li>老九</li>
-                                <li>张三</li>
-                                <li>李四</li>
-                                <li>王五</li>
-                                <li>赵六</li>
-                                <li>小七</li>
-                                <li>老八</li>
-                                <li>老九</li>
+                                <li v-for="(成员, 标识) in 成员列表" :key="标识">{{成员.用户名}}</li>
                             </ul>
                         </div>
                     </div>

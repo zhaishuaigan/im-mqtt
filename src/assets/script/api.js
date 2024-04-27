@@ -55,6 +55,15 @@
         保存本地缓存: function (标志, 内容) {
             localStorage.setItem(标志, this.加密内容(内容));
         },
+        生成用户标识: function () {
+            var 用户标识 = this.获取本地缓存('用户标识');
+            if (用户标识) {
+                return 用户标识;
+            }
+            用户标识 = Math.random().toString(36).substring(2, 10);
+            this.保存本地缓存('用户标识', 用户标识);
+            return 用户标识;
+        },
         获取数据: async function (标志, 默认值) {
             await this.自动处理接口调用时间();
             var 接口地址 = "https://dweet.io/get/latest/dweet/for/" + 接口.加密标志(标志);

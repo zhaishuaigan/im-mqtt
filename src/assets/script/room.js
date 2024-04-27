@@ -10,6 +10,7 @@
         this.名字 = "";
         this.加入密码 = "";
         this.管理密码 = "";
+        this.公告 = "";
         this.已是管理员 = false;
         this.消息主题名 = '';
     }
@@ -135,8 +136,6 @@
     聊天室.prototype.发送消息 = function (消息) {
         this.消息服务.发送消息(this.消息主题名, 消息);
     }
-
-
 
     window.聊天室 = 聊天室;
 })();
