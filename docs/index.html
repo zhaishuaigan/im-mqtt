@@ -7082,7 +7082,7 @@ function print() { __p += __j.call(arguments, '') }
         });
     }
     消息服务.创建实例 = function () {
-        return new 消息服务('ws://broker.emqx.io:8083/mqtt');
+        return new 消息服务('wss://broker.emqx.io:8084/mqtt');
     }
     消息服务.prototype.连接成功 = function (回调) {
         this.回调函数.连接成功 = 回调;
