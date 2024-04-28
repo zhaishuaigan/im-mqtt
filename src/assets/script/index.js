@@ -208,6 +208,9 @@
                     文件地址: 网络地址,
                 }));
             },
+            点击成员: function (成员) {
+                this.用户输入的内容 += "@" + 成员.用户名 + " ";
+            },
             暂未实现: function () {
                 ElementPlus.ElMessage({
                     type: 'info',

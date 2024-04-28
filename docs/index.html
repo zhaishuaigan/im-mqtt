@@ -7398,7 +7398,7 @@ function print() { __p += __j.call(arguments, '') }
                         <div class="标题">群聊成员</div>
                         <div class="成员列表">
                             <ul>
-                                <li v-for="(成员, 标识) in 成员列表" :key="标识">{{成员.用户名}}</li>
+                                <li v-for="(成员, 标识) in 成员列表" :key="标识" @click="点击成员(成员)">{{成员.用户名}}</li>
                             </ul>
                         </div>
                     </div>
@@ -7616,6 +7616,9 @@ function print() { __p += __j.call(arguments, '') }
                     文件大小: 文件.result.size,
                     文件地址: 网络地址,
                 }));
+            },
+            点击成员: function (成员) {
+                this.用户输入的内容 += "@" + 成员.用户名 + " ";
             },
             暂未实现: function () {
                 ElementPlus.ElMessage({
