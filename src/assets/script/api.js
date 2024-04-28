@@ -80,19 +80,33 @@
             var 返回结果 = await fetch(接口地址);
             return await 返回结果.json();
         },
-        上传图片: async (file) => {
-            return new Promise(resolve => {
-                resolve({
-                    // 图片地址
-                })
-            })
+        上传图片: async (文件) => {
+            var 接口地址 = 'https://api.apiopen.top/api/uploadFile';
+            const 表单数据 = new FormData();
+            表单数据.append('file', 文件);
+            var 参数 = {
+                method: 'POST',
+                body: 表单数据,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            }
+            var 返回结果 = await fetch(接口地址, 参数);
+            return await 返回结果.json();
         },
-        上传文件: async (file) => {
-            return new Promise(resolve => {
-                resolve({
-                    // 文件地址
-                })
-            })
+        上传文件: async (文件) => {
+            var 接口地址 = 'https://api.apiopen.top/api/uploadFile';
+            const 表单数据 = new FormData();
+            表单数据.append('file', 文件);
+            var 参数 = {
+                method: 'POST',
+                body: 表单数据,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            }
+            var 返回结果 = await fetch(接口地址, 参数);
+            return await 返回结果.json();
         },
         获取聊天室列表: async function () {
             return await this.获取数据('聊天室列表', []);
@@ -123,6 +137,16 @@
             };
             var 返回结果 = await fetch(接口地址, 参数);
             return await 返回结果.json();
+        },
+        选择图片: async function () {
+            // 使用web file system api选择图片
+            var 选择的文件列表 = await window.showOpenFilePicker();
+            if (!选择的文件列表) {
+                return null;
+            }
+            var 选择的文件 = await 选择的文件列表[0].getFile();
+            console.log('选择的文件', 选择的文件);
+            return 选择的文件;
         }
     }
 

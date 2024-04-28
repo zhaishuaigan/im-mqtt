@@ -124,6 +124,7 @@
                 switch (消息.消息类型) {
                     case '文本':
                     case '图片':
+                    case '视频':
                     case '文件':
                         this.消息列表.push(消息);
                         setTimeout(() => {
@@ -177,6 +178,41 @@
                 });
                 this.当前聊天室.发送消息(消息);
                 this.用户输入的内容 = '';
+            },
+            发送图片: async function (图片) {
+                var 网络地址 = 'https://api.apiopen.top' + 图片.result.name;
+                this.当前聊天室.发送消息(接口.加密内容({
+                    发送人: this.当前用户名,
+                    用户标识: this.当前用户标识,
+                    消息类型: '图片',
+                    内容: 网络地址,
+                }))
+            },
+            发送视频: async function (视频) {
+                var 网络地址 = 'https://api.apiopen.top' + 视频.result.name;
+                this.当前聊天室.发送消息(接口.加密内容({
+                    发送人: this.当前用户名,
+                    用户标识: this.当前用户标识,
+                    消息类型: '视频',
+                    内容: 网络地址,
+                }));
+            },
+            发送文件: async function (文件) {
+                var 网络地址 = 'https://api.apiopen.top' + 文件.result.name;
+                this.当前聊天室.发送消息(接口.加密内容({
+                    发送人: this.当前用户名,
+                    用户标识: this.当前用户标识,
+                    消息类型: '文件',
+                    文件名: 文件.result.name.replace(/.*\//, ''),
+                    文件大小: 文件.result.size,
+                    文件地址: 网络地址,
+                }));
+            },
+            暂未实现: function () {
+                ElementPlus.ElMessage({
+                    type: 'info',
+                    message: '暂未实现',
+                })
             }
         }
     }).use(ElementPlus).mount('#主程序界面');
