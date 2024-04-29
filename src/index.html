@@ -17,6 +17,7 @@
     <script src="./assets/script/api.js"></script>
     <script src="./assets/script/mqtt.js"></script>
     <script src="./assets/script/room.js"></script>
+    <script src="./assets/script/svg.js"></script>
 </head>
 
 <body>
@@ -92,6 +93,7 @@
                                             <div class="下载"><a :href="消息.文件地址" download="" target="_blank">点击下载</a>
                                             </div>
                                         </div>
+                                        <div class="表情" v-if="消息.消息类型 == '表情'" v-html="表情[消息.内容]"></div>
                                     </div>
                                 </div>
                             </template>
@@ -122,16 +124,25 @@
                                         </path>
                                     </svg>
                                 </el-upload>
+                                <el-popover :visible="显示表情选择框" class="表情" placement="bottom" :width="320"
+                                    trigger="click">
+                                    <template #reference>
+                                        <svg class="发送表情按钮" @click="显示表情选择框 = true" viewBox="0 0 1024 1024">
+                                            <path
+                                                d="M512 64C264.576 64 64 264.576 64 512s200.576 448 448 448 448-200.576 448-448S759.424 64 512 64z m0 832C299.936 896 128 724.064 128 512S299.936 128 512 128s384 171.936 384 384-171.936 384-384 384z">
+                                            </path>
+                                            <path d="M320 384m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z"></path>
+                                            <path d="M704 384m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z"></path>
+                                            <path d="M224 512c0 159.072 128.928 288 288 288s288-128.928 288-288H224z">
+                                            </path>
+                                        </svg>
+                                    </template>
+                                    <div class="表情列表">
+                                        <div v-for="(表情, 标识) in 表情" :key="标识" :data-key="标识" @click="发送表情(标识)" v-html="表情"></div>
+                                    </div>
+                                </el-popover>
 
 
-                                <svg class="发送表情按钮" viewBox="0 0 1024 1024" @click="暂未实现">
-                                    <path
-                                        d="M512 64C264.576 64 64 264.576 64 512s200.576 448 448 448 448-200.576 448-448S759.424 64 512 64z m0 832C299.936 896 128 724.064 128 512S299.936 128 512 128s384 171.936 384 384-171.936 384-384 384z">
-                                    </path>
-                                    <path d="M320 384m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z"></path>
-                                    <path d="M704 384m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z"></path>
-                                    <path d="M224 512c0 159.072 128.928 288 288 288s288-128.928 288-288H224z"></path>
-                                </svg>
                             </div>
                             <textarea name="" v-model="用户输入的内容" @keyup.ctrl.enter="发送消息" class="文本框" id="" cols="30"
                                 rows="10"></textarea>

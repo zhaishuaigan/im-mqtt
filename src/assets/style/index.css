@@ -100,21 +100,21 @@ body {
     overflow: hidden;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 {
+.历史消息区域 {
     border-bottom: 1px solid #e9e9e9;
     flex: auto;
     overflow-y: scroll;
     padding: 20px;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .别人发的 {
+.历史消息区域 .别人发的 {
     padding-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .自己发的 {
+.历史消息区域 .自己发的 {
     padding-top: 10px;
     display: flex;
     flex-direction: column;
@@ -123,13 +123,13 @@ body {
 }
 
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .昵称 {
+.历史消息区域 .昵称 {
     font-size: 12px;
     line-height: 20px;
     color: #a5a5a5;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .消息内容 {
+.历史消息区域 .消息内容 {
     background-color: #FFF;
     border-radius: 5px;
     padding: 10px;
@@ -140,62 +140,95 @@ body {
     overflow: hidden;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .消息内容 pre {
+.历史消息区域 .消息内容 pre {
     margin: 0px;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .消息内容 img {
+.历史消息区域 .消息内容 img {
     max-width: 100%;
     background-color: #ffffff;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .消息内容 video {
+.历史消息区域 .消息内容 video {
     max-width: 100%;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .消息内容 .文件 a {
+.历史消息区域 .消息内容 .文件 a {
     color: #00FF00;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .历史消息区域 .自己发的 .消息内容 {
-    background-color: #0099FF;
-    color: #ffffff;
-
+.历史消息区域 .表情 svg {
+    width: 64px;
+    height: 64px;
+    background: #ffffff;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 {
+.历史消息区域 .自己发的 .消息内容 {
+    background-color: #0099FF;
+    color: #ffffff;
+}
+
+
+
+.发送消息区域 {
     height: 200px;
     display: flex;
     flex-direction: column;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 .工具栏 {
+.发送消息区域 .工具栏 {
     padding: 5px 10px;
     /* border-bottom: 1px solid #e9e9e9; */
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 .工具栏 .上传按钮 {
+.发送消息区域 .工具栏 .上传按钮 {
     display: inline-block;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 .工具栏 svg {
-    width: 22px;
-    height: 22px;
+.发送消息区域 .工具栏 svg {
+    width: 24px;
+    height: 24px;
     cursor: pointer;
     padding: 0px 5px;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 .工具栏 svg path {
+.发送消息区域 .工具栏 svg path {
     fill: #a5a5a5;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 .工具栏 svg:hover path {
+.发送消息区域 .工具栏 svg:hover path {
     fill: #0099FF;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 .文本框 {
+.表情列表 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #a5a5a5;
+}
+
+.表情列表 svg {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    padding: 0px 5px;
+}
+
+.表情列表 svg path {
+    fill: #a5a5a5;
+}
+
+.表情列表 svg:hover path {
+    fill: #0099FF;
+}
+
+.发送消息区域 .文本框 {
     flex: auto;
     padding: 0px 10px;
     border: none;
@@ -206,17 +239,17 @@ body {
     background-color: transparent;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 .按钮 {
+.发送消息区域 .按钮 {
     padding: 10px;
     text-align: right;
 }
 
-.聊天室界面 .盒子 .内容区域 .左边 .发送消息区域 .按钮 {
+.发送消息区域 .按钮 {
     padding: 10px;
     text-align: right;
 }
 
-.聊天室界面 .盒子 .内容区域 .右边 {
+.聊天室界面 .右边 {
     width: 180px;
     display: flex;
     flex-direction: column;
@@ -251,7 +284,7 @@ body {
     line-height: 20px;
 }
 
-.聊天室界面 .右边 .成员列表 ul {
+.成员列表 ul {
     list-style: none;
     padding: 0px;
     margin: 0px;
@@ -259,7 +292,7 @@ body {
 
 
 
-.聊天室界面 .右边 .成员列表 ul li {
+.成员列表 ul li {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -276,11 +309,11 @@ body {
 
 
 
-.聊天室界面 .右边 .成员列表 ul li:hover {
+.成员列表 ul li:hover {
     background-color: #e9e9e9;
 }
 
-.聊天室界面 .右边 .成员列表 ul li::before {
+.成员列表 ul li::before {
     display: block;
     content: "";
     width: 10px;
@@ -289,9 +322,3 @@ body {
     background-color: #0099FF;
     margin-right: 5px;
 }
-
-.聊天室界面 .右边 .成员列表 ul li.管理员::before {
-    background-color: #FF6600;
-}
-
-.聊天室界面 .右边 .成员列表 ul li.禁言::before {}

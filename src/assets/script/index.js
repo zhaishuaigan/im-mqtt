@@ -25,6 +25,9 @@
                 当前用户名: 接口.获取本地缓存('当前用户名'),
                 当前用户标识: 接口.生成用户标识(),
                 用户输入的内容: '',
+                表情: window.表情,
+                显示表情选择框: false,
+                加载中: false,
             };
         },
         created: async function () {
@@ -62,10 +65,12 @@
                     })
             },
             创建聊天室: async function (创建聊天室的数据) {
+                this.显示加载中('正在创建请稍后...');
                 var 名字 = 创建聊天室的数据.名字;
                 var 加入密码 = 创建聊天室的数据.加入密码;
                 var 管理密码 = 创建聊天室的数据.管理密码;
                 if (await 聊天室.已存在(名字)) {
+                    this.隐藏加载中();
                     ElementPlus.ElNotification({
                         title: '提示',
                         message: '聊天室名字已存在',
@@ -75,17 +80,19 @@
                     return;
                 }
                 this.当前聊天室 = await 聊天室.创建聊天室(名字, 加入密码, 管理密码);
-                console.log('新聊天室: ', this.当前聊天室);
                 this.显示界面 = '聊天室界面';
                 this.创建聊天室的界面 = false;
+                this.隐藏加载中();
                 this.连接聊天服务器();
             },
             加入聊天室: async function (加入聊天室的数据) {
+                this.显示加载中('正在加入请稍后...');
                 var 名字 = 加入聊天室的数据.名字;
                 var 加入密码 = 加入聊天室的数据.加入密码;
                 var 管理密码 = 加入聊天室的数据.管理密码;
                 var 加入的聊天室 = await 聊天室.加入聊天室(名字, 加入密码, 管理密码)
                     .catch((错误信息) => {
+                        this.隐藏加载中();
                         ElementPlus.ElNotification({
                             title: '提示',
                             message: 错误信息,
@@ -93,6 +100,7 @@
                             duration: 3000,
                         });
                     });
+                this.隐藏加载中();
                 if (!加入的聊天室) {
                     return;
                 }
@@ -103,10 +111,11 @@
             },
 
             连接聊天服务器: function () {
+                this.显示加载中('正在连接请稍后...');
                 this.当前聊天室.连接成功((...参数) => {
+                    this.隐藏加载中();
                     console.log('连接成功: ', ...参数);
                     this.定时更新成员信息();
-
                     this.当前聊天室.发送消息(接口.加密内容({
                         发送人: this.当前用户名,
                         用户标识: this.当前用户标识,
@@ -126,6 +135,7 @@
                     case '图片':
                     case '视频':
                     case '文件':
+                    case '表情':
                         this.消息列表.push(消息);
                         setTimeout(() => {
                             this.$refs['历史消息区域'].scrollTop = this.$refs['历史消息区域'].scrollHeight;
@@ -210,6 +220,26 @@
             },
             点击成员: function (成员) {
                 this.用户输入的内容 += "@" + 成员.用户名 + " ";
+            },
+            发送表情: function (表情) {
+                this.显示表情选择框 = false;
+                this.当前聊天室.发送消息(接口.加密内容({
+                    发送人: this.当前用户名,
+                    用户标识: this.当前用户标识,
+                    消息类型: '表情',
+                    内容: 表情,
+                }));
+            },
+            显示加载中: function (提示文字) {
+                this.显示表情选择框 = false;
+                this.加载中 = ElementPlus.ElLoading.service({
+                    lock: true,
+                    text: 提示文字 ? 提示文字 : '正在加载',
+                    background: 'rgba(0, 0, 0, 0.7)',
+                });
+            },
+            隐藏加载中: function () {
+                this.加载中 ? this.加载中.close() : null;
             },
             暂未实现: function () {
                 ElementPlus.ElMessage({
