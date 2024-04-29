@@ -279,6 +279,7 @@ body {
     line-height: 20px;
     color: #a5a5a5;
     overflow: auto;
+    cursor: pointer;
 }
 
 .聊天室界面 .右边 .成员列表 {

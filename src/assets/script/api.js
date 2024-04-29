@@ -138,15 +138,15 @@
             var 返回结果 = await fetch(接口地址, 参数);
             return await 返回结果.json();
         },
-        选择图片: async function () {
-            // 使用web file system api选择图片
-            var 选择的文件列表 = await window.showOpenFilePicker();
-            if (!选择的文件列表) {
-                return null;
+        修改公告: async function (名字, 公告) {
+            var 聊天室列表 = await this.获取聊天室列表();
+            for (var i = 0; i < 聊天室列表.length; i++) {
+                if (聊天室列表[i].名字 === 名字) {
+                    聊天室列表[i]['公告'] = 公告;
+                }
             }
-            var 选择的文件 = await 选择的文件列表[0].getFile();
-            console.log('选择的文件', 选择的文件);
-            return 选择的文件;
+            this.保存数据('聊天室列表', 聊天室列表);
+
         }
     }
 
