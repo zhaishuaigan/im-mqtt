@@ -159,6 +159,11 @@ body {
     color: #00FF00;
 }
 
+.历史消息区域 .表情 {
+    padding: 10px;
+    background: #FFFFFF;
+}
+
 .历史消息区域 .表情 svg {
     width: 64px;
     height: 64px;
